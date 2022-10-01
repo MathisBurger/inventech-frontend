@@ -1,7 +1,20 @@
 import {NextPage} from "next";
+import useApiService from "../hooks/useApiService";
+import {FormEvent, useState} from "react";
 
 
 const Login: NextPage = () => {
+
+    const api = useApiService();
+    const [loginFailed, setLoginFailed] = useState<boolean>(false);
+
+    const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const mail = (e.nativeEvent.target as any)[0].value;
+        const password = (e.nativeEvent.target as any)[1].value;
+        const result = await api.login(mail, password);
+        console.log(result.status);
+    }
 
     return (
         <div className="page-container">
@@ -12,7 +25,7 @@ const Login: NextPage = () => {
                              className="img-fluid" alt="Sample image" />
                     </div>
                     <div className="col-md-9 col-lg-7 col-xl-5 offset-xl-1">
-                        <form>
+                        <form onSubmit={onSubmit}>
                             <div className="form-outline mb-4">
                                 <input type="email" id="form3Example3" className="form-control form-control-lg"
                                        placeholder="Enter a valid email address"/>
