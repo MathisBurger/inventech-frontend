@@ -12,7 +12,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   const api = useApiService();
   const [loginLoading, setLoginLoading] = useState<boolean>(true);
-  const [token, setToken] = useState<string>('');
+  const [token, setToken] = useState<string|null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -31,7 +31,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         }
         setLoginLoading(false);
       };
-      if (window.location.pathname !== '/login') {
+      if (window.location.pathname !== '/login' && token !== null) {
         fetcher().then();
       } else {
         setLoginLoading(false);
