@@ -1,6 +1,7 @@
 import {BaseWebFetcher} from "./BaseWebFetcher";
 import {LoginResponse} from "../typings/LoginResponse";
 import {ResetPasswordResponse} from "../typings/ResetPasswordResponse";
+import {BaseResponse} from "../typings/BaseResponse";
 
 export class ApiService extends BaseWebFetcher {
 
@@ -19,5 +20,10 @@ export class ApiService extends BaseWebFetcher {
             oldpassword,
             newpassword
         });
+    }
+
+    public async checkToken(token: string): Promise<BaseResponse>
+    {
+        return await this.post<BaseResponse>("/checkToken", {token});
     }
 }

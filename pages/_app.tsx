@@ -2,11 +2,44 @@ import type { AppProps } from 'next/app';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/globals.scss';
 import Footer from "../components/Footer";
+import useApiService from "../hooks/useApiService";
+import {useEffect, useState} from "react";
+import {useRouter} from "next/router";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 function MyApp({ Component, pageProps }: AppProps) {
+
+  const api = useApiService();
+  const [loginLoading, setLoginLoading] = useState<boolean>(true);
+  const [token, setToken] = useState<string>('');
+  const router = useRouter();
+
+  useEffect(() => {
+    setToken(localStorage.getItem("token") ?? '');
+  });
+
+  useEffect(() => {
+      const fetcher = async () => {
+        try {
+          const result = await api.checkToken(token ?? '');
+          if (result.status !== '1') {
+            await router.push("/login");
+          }
+        } catch (error) {
+          await router.push("/login");
+        }
+        setLoginLoading(false);
+      };
+      fetcher().then();
+  }, [token]);
+
   return (
     <>
-      <Component {...pageProps} />
+        {loginLoading ? (
+            <LoadingSpinner />
+        ): (
+            <Component {...pageProps} />
+        )}
       <Footer />
     </>
   );
