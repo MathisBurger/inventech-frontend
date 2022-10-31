@@ -1,5 +1,5 @@
 import {BaseResponse} from "./BaseResponse";
 
-export interface LoginResponse extends BaseResponse {
+export interface ResetPasswordResponse extends BaseResponse {
     token?: string;
 }
