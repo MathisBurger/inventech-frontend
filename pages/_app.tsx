@@ -6,6 +6,7 @@ import useApiService from "../hooks/useApiService";
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import LoadingSpinner from "../components/LoadingSpinner";
+import TopNavbar from "../components/TopNavbar";
 
 function MyApp({ Component, pageProps }: AppProps) {
 
@@ -39,6 +40,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
+        <TopNavbar />
         {loginLoading ? (
             <LoadingSpinner />
         ): (
