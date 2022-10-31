@@ -29,6 +29,10 @@ const TopNavbar: React.FC = () => {
         {
             route: '/reset-password',
             name: 'Reset password'
+        },
+        {
+            route: '/memes',
+            name: 'Memes'
         }
     ]
 
