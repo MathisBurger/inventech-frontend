@@ -30,7 +30,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         }
         setLoginLoading(false);
       };
-      fetcher().then();
+      if (window.location.pathname !== '/login') {
+        fetcher().then();
+      } else {
+        setLoginLoading(false);
+      }
   }, [token]);
 
   return (
