@@ -2,6 +2,7 @@ import {BaseWebFetcher} from "./BaseWebFetcher";
 import {LoginResponse} from "../typings/LoginResponse";
 import {ResetPasswordResponse} from "../typings/ResetPasswordResponse";
 import {BaseResponse} from "../typings/BaseResponse";
+import {ListItemsResponse} from "../typings/ListItemsResponse";
 
 export class ApiService extends BaseWebFetcher {
 
@@ -25,5 +26,10 @@ export class ApiService extends BaseWebFetcher {
     public async checkToken(token: string): Promise<BaseResponse>
     {
         return await this.post<BaseResponse>("/checkToken", {token});
+    }
+
+    public async itemList(token: string): Promise<ListItemsResponse>
+    {
+        return await this.post<ListItemsResponse>("/item/list", {token});
     }
 }
