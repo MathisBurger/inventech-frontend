@@ -1,19 +1,29 @@
 import {NextPage} from "next";
 import useApiService from "../hooks/useApiService";
-import {FormEvent, useState} from "react";
+import {FormEvent} from "react";
+import {useRouter} from "next/router";
 
 
 const Login: NextPage = () => {
 
     const api = useApiService();
-    const [loginFailed, setLoginFailed] = useState<boolean>(false);
+    const router = useRouter();
 
     const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const mail = (e.nativeEvent.target as any)[0].value;
         const password = (e.nativeEvent.target as any)[1].value;
-        const result = await api.login(mail, password);
-        console.log(result.status);
+        try {
+            const result = await api.login(mail, password);
+            if (parseInt(`${result.status}`) === 1) {
+                localStorage.setItem("token", result.token ?? '');
+                await router.push("/");
+            } else {
+                alert("Login failed");
+            }
+        } catch (error) {
+            alert(error);
+        }
     }
 
     return (
