@@ -3,11 +3,10 @@ import {LoginResponse} from "../typings/LoginResponse";
 
 export class ApiService extends BaseWebFetcher {
 
-    public async login(mail: string, password: string): Promise<LoginResponse>
+    public async login(username: string, password: string): Promise<LoginResponse>
     {
-        return await this.post<LoginResponse>("/v1", {
-            type: 'loginpw',
-            mail,
+        return await this.post<LoginResponse>("/login", {
+            username,
             password
         });
     }

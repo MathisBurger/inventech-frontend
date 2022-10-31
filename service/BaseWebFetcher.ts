@@ -1,5 +1,5 @@
 
-const BASE_URL = 'http://10.0.4.214:5000';
+const BASE_URL = 'http://nick-rathje.de:888';
 
 export class BaseWebFetcher {
 
@@ -17,10 +17,10 @@ export class BaseWebFetcher {
     {
         const result = await window.fetch(`${BASE_URL}${route}`, {
             method: method,
-            headers: body ? {
-                'Content-Type': 'application/json'
-            } : undefined,
-            mode: 'no-cors',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            mode: 'cors',
             body: body ? JSON.stringify(body) : undefined,
         });
         if (!result.ok) {

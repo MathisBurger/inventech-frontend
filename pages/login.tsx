@@ -27,9 +27,9 @@ const Login: NextPage = () => {
                     <div className="col-md-9 col-lg-7 col-xl-5 offset-xl-1">
                         <form onSubmit={onSubmit}>
                             <div className="form-outline mb-4">
-                                <input type="email" id="form3Example3" className="form-control form-control-lg"
-                                       placeholder="Enter a valid email address"/>
-                                <label className="form-label" htmlFor="form3Example3">Email address</label>
+                                <input type="text" id="form3Example3" className="form-control form-control-lg"
+                                       placeholder="Enter your username"/>
+                                <label className="form-label" htmlFor="form3Example3">Username</label>
                             </div>
 
                             <div className="form-outline mb-3">
